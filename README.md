@@ -400,10 +400,3 @@ The rates (UGX 500 a day, the trust deductions, the 14-day limit) are placeholde
 
 ---
 
-## 8. Ideas for extending the project
-
-- Persist data with SQLite or JSON using `__dict__` / `dataclasses.asdict`.
-- Add a `Notification` class with an abstract `send()` and `SMSNotification` / `EmailNotification` subclasses.
-- Add a `__iter__` method on `Student` so you can loop over their items directly.
-- Write unit tests with `unittest` or `pytest`, for example that `LossPenalty` never goes negative.
-- Use `typing.Protocol` to define a `Payable` interface that penalties and deposits both satisfy.
