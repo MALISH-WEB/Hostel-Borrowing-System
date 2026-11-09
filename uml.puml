@@ -1,0 +1,51 @@
+@startuml
+title Hostel Borrowing System - Member 5: Penalties and Disputes
+
+abstract class Penalty {
+  - description: str
+  {abstract} + calculate(): Decimal
+}
+
+class LateFeePenalty {
+  - days_late: int
+  - daily_rate: Decimal
+  + calculate(): Decimal
+}
+
+class DamagePenalty {
+  - repair_cost: Decimal
+  + calculate(): Decimal
+}
+
+class LossPenalty {
+  - item_value: Decimal
+  - deposit: Decimal
+  + calculate(): Decimal
+}
+
+class Dispute {
+  + borrower: str
+  + penalty: Penalty
+  + reason: str
+  + status: DisputeStatus
+  + warden_response: str
+  + submit(): void
+  + forward_to_warden(): void
+  + mark_under_review(): void
+  + resolve(warden_response: str): void
+}
+
+enum DisputeStatus {
+  DRAFT
+  SUBMITTED
+  SENT_TO_WARDEN
+  UNDER_REVIEW
+  RESOLVED
+}
+
+Penalty <|-- LateFeePenalty
+Penalty <|-- DamagePenalty
+Penalty <|-- LossPenalty
+Dispute --> Penalty : contests
+Dispute --> DisputeStatus : has status
+@enduml
